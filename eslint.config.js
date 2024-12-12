@@ -1,5 +1,6 @@
 import pluginJs from '@eslint/js';
 import pluginRouter from '@tanstack/eslint-plugin-router';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import pluginReact from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import globals from 'globals';
@@ -21,6 +22,7 @@ export default [
       'react-compiler/react-compiler': 'error',
     },
   },
+  eslintConfigPrettier,
   {
     rules: {
       'react/react-in-jsx-scope': 'off',
