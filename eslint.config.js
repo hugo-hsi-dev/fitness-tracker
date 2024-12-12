@@ -21,4 +21,9 @@ export default [
       'react-compiler/react-compiler': 'error',
     },
   },
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
 ];
