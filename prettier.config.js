@@ -10,11 +10,17 @@ export default {
   // This plugin's options
   importOrder: [
     '^react$',
+    '',
     '<THIRD_PARTY_MODULES>',
+    '',
     '^@/app/(.*)$',
     '^@/features/(.*)$',
     '^@/lib/(.*)$',
+    '',
     '.css$',
+    '',
+    './routeTree.gen',
+    '',
     '^[.]',
   ],
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],

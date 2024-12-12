@@ -1,14 +1,23 @@
 // app/routes/__root.tsx
 import '@/lib/styles/index.css';
-import type { ReactNode } from 'react';
+
+import { type ReactNode } from 'react';
+
+import type { QueryClient } from '@tanstack/react-query';
 import {
-  createRootRoute,
+  createRootRouteWithContext,
   Outlet,
   ScrollRestoration,
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
 
-export const Route = createRootRoute({
+import Devtools from '@/lib/devtools/devtools';
+
+type RootRouteContext = {
+  queryClient: QueryClient;
+};
+
+export const Route = createRootRouteWithContext<RootRouteContext>()({
   head: () => ({
     meta: [
       {
@@ -43,6 +52,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <body>
         {children}
         <ScrollRestoration />
+        <Devtools />
         <Scripts />
       </body>
     </html>
