@@ -1,12 +1,12 @@
 // app/routes/__root.tsx
+import '@/lib/styles/index.css';
+import type { ReactNode } from 'react';
 import {
+  createRootRoute,
   Outlet,
   ScrollRestoration,
-  createRootRoute,
 } from '@tanstack/react-router';
 import { Meta, Scripts } from '@tanstack/start';
-import type { ReactNode } from 'react';
-import '../../lib/styles/index.css';
 
 export const Route = createRootRoute({
   head: () => ({
