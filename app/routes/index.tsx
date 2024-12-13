@@ -1,28 +1,30 @@
 // app/routes/index.tsx
-import { useState } from 'react';
 
+import { PrismaClient } from '@prisma/client';
 import { createFileRoute } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/start';
 
-import { serverEnv } from '@/lib/env/server';
+const getUsers = createServerFn({ method: 'GET' }).handler(async () => {
+  const prisma = new PrismaClient();
+  const result = prisma.user.findMany();
+  console.log(result);
+  return result;
+});
 
 export const Route = createFileRoute('/')({
   component: Home,
-  loader() {
-    return serverEnv.DATABASE_URL[1];
+  async loader() {
+    return await getUsers();
   },
 });
 
 function Home() {
-  const [state, setState] = useState(0);
-  const url = Route.useLoaderData();
+  const users = Route.useLoaderData();
   return (
-    <button
-      type="button"
-      onClick={() => {
-        setState((prev) => prev + 1);
-      }}
-    >
-      Add 1 to {state}? {url}
-    </button>
+    <div>
+      {users.map((user) => (
+        <div key={user.id}>{user.name}</div>
+      ))}
+    </div>
   );
 }
