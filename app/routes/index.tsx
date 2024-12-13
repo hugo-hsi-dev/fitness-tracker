@@ -6,7 +6,7 @@ import { createServerFn } from '@tanstack/start';
 
 const getUsers = createServerFn({ method: 'GET' }).handler(async () => {
   const prisma = new PrismaClient();
-  const result = prisma.user.findMany();
+  const result = await prisma.user.findMany();
   console.log(result);
   return result;
 });
