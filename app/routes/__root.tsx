@@ -1,6 +1,4 @@
 // app/routes/__root.tsx
-import '@/lib/styles/index.css';
-
 import { type ReactNode } from 'react';
 
 import type { QueryClient } from '@tanstack/react-query';
@@ -12,6 +10,8 @@ import {
 import { Meta, Scripts } from '@tanstack/start';
 
 import Devtools from '@/lib/devtools/devtools';
+import NextUIProvider from '@/lib/providers/next-ui-provider';
+import styles from '@/lib/styles/index.css?url';
 
 type RootRouteContext = {
   queryClient: QueryClient;
@@ -31,6 +31,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
         title: 'TanStack Start Starter',
       },
     ],
+    links: [{ rel: 'stylesheet', href: styles }],
   }),
   component: RootComponent,
 });
@@ -50,10 +51,12 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <Meta />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Devtools />
-        <Scripts />
+        <NextUIProvider>
+          {children}
+          <ScrollRestoration />
+          <Devtools />
+          <Scripts />
+        </NextUIProvider>
       </body>
     </html>
   );
