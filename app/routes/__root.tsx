@@ -10,8 +10,7 @@ import {
 import { Meta, Scripts } from '@tanstack/start';
 
 import Devtools from '@/lib/devtools/devtools';
-import NextUIProvider from '@/lib/providers/next-ui-provider';
-import styles from '@/lib/styles/index.css?url';
+import styles from '@/lib/styles/globals.css?url';
 
 type RootRouteContext = {
   queryClient: QueryClient;
@@ -51,12 +50,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <Meta />
       </head>
       <body>
-        <NextUIProvider>
-          {children}
-          <ScrollRestoration />
-          <Devtools />
-          <Scripts />
-        </NextUIProvider>
+        {children}
+        <ScrollRestoration />
+        <Devtools />
+        <Scripts />
       </body>
     </html>
   );
